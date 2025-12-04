@@ -72,14 +72,18 @@ Documents → Chunking → Embeddings → Vector DB → Retrieval → Generation
 
 **Answer:**
 
-Hybrid search combines dense (semantic) and sparse (keyword) retrieval for better results.
-
+Hybrid search combines dense (semantic) and sparse (keyword) retrieval for better results.Hybrid search means using two different retrieval methods together:
+Dense retrieval → finds text based on meaning (semantic similarity)
+Sparse retrieval → finds text based on exact words (keyword matching)
+Why? Because some queries need exact matching (“invoice 2023-44”), while others need semantic matching (“symptoms of high sugar levels”).
+Hybrid search mixes these scores using weights like:
+70% semantic + 30% keyword or 50/50 or tuned based on use case
 **Implementation Components:**
 - **Dense Retriever**: Semantic search using embeddings
 - **Sparse Retriever**: Keyword-based search (TF-IDF, BM25)
 - **Score Combination**: Weighted combination of dense and sparse scores
 - **Result Ranking**: Rank results by combined scores
-- **Normalization**: Normalize scores from different retrievers
+- **Normalization**: Semantic scores and keyword scores come from different mathematical scales. Normalize scores from different retrievers
 
 **Benefits:**
 - **Comprehensive**: Covers both semantic and keyword matches
