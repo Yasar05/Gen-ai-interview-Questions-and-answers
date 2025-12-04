@@ -194,14 +194,18 @@ Reranking improves retrieval quality by reordering results using more sophistica
 
 **Answer:**
 
-Metadata filtering allows querying by document properties alongside semantic search.
+Metadata filtering allows querying by document properties alongside semantic search.Metadata filtering means restricting retrieval results based on information attached to each chunk — like document type, date, author, language, department, or category.
+
 
 **Implementation Components:**
-- **Filter Query Builder**: Build filter queries from criteria
-- **Vector Database Integration**: Apply filters to vector search
-- **Metadata Matching**: Match documents against filter criteria
-- **Result Filtering**: Filter results based on metadata
-- **Query Optimization**: Optimize filtered queries for performance
+- **Filter Query Builder**: Build filter queries from criteria. Translate requirements into filters. User asks: “Show me finance policies updated after 2022.”
+Filter Query Builder creates a filter with 2022 year.
+- **Vector Database Integration**: Apply filters inside the vector search.Vector DBs like Qdrant, Weaviate, Pinecone, Milvus allow filtered vector search.This means: First apply metadata filters. Then run semantic search inside the filtered subset. Why? It avoids retrieving irrelevant chunks entirely.
+Example: Search only inside: year = 2023,department = Finance
+Instead of searching all documents.
+- **Metadata Matching**: Match documents against filter criteria. Check if each chunk satisfies the filter. The system checks: Does this chunk’s metadata match the filter? If yes → include it in the candidate pool, If not → ignore it
+- **Result Filtering**: Filter results based on metadata. Even after retrieval, you may want to run post-filtering:Remove chunks missing required metadata. Remove private, restricted, or unsafe categories. Down-rank or discard irrelevant document types
+- **Query Optimization**: Optimize filtered queries for performance. Make filtered searches fast & efficient. eg: Search only the "Finance" partition instead of scanning all chunks.
 
 **Filter Types:**
 - **Exact Match**: doc_type = "pdf"
