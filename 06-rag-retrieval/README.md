@@ -42,19 +42,23 @@ Documents → Chunking → Embeddings → Vector DB → Retrieval → Generation
 - **Use Case**: General-purpose document processing
 
 **2. Semantic Chunking:**
-- **Process**: Group sentences based on semantic similarity
+- **Process**: Group sentences based on semantic similarity. Instead of slicing by size, we slice based on meaning. The system groups sentences that are semantically related by analyzing:topic similarity, sentence embeddings, paragraph boundaries. Semantic chunking ensures each chunk stays within one topic.
 - **Parameters**: Similarity threshold (e.g., 0.8)
 - **Benefits**: Maintains semantic coherence within chunks
 - **Use Case**: Documents with clear semantic boundaries
 
 **3. Hierarchical Chunking:**
-- **Process**: Create multiple levels of chunks (sections, paragraphs, sentences)
+- **Process**: Create multiple levels of chunks (sections, paragraphs, sentences).
+- Level 1 → sections
+Level 2 → subsections
+Level 3 → paragraphs
+Level 4 → sentences
 - **Structure**: Hierarchical organization of document content
 - **Benefits**: Flexible retrieval at different granularity levels
 - **Use Case**: Complex documents with clear hierarchical structure
 
 **4. Sliding Window Chunking:**
-- **Process**: Create overlapping chunks with sliding window approach
+- **Process**: Create overlapping chunks with sliding window approach. This method uses overlapping windows. This ensures the context flows smoothly across chunks.
 - **Parameters**: Window size (e.g., 512 tokens), step size (e.g., 256 tokens)
 - **Benefits**: Ensures context continuity across chunks
 - **Use Case**: Sequential documents where context matters
