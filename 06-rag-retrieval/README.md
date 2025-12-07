@@ -651,14 +651,15 @@ Which reranker job finished
 - **Result Aggregation**: Aggregate results from async operations
 - **Performance Scaling**: Scale with concurrent requests
 
-**4. Database Optimization:**
-- **Index Optimization**: Optimize vector database indexes
-- **Query Optimization**: Optimize query performance
-- **Connection Pooling**: Manage database connections
-- **Resource Management**: Optimize resource usage
+**4. Database Optimization:**: Your vector DB is one of the biggest bottlenecks in RAG. These optimizations are essential.
+- **Index Optimization**: Optimize vector database indexes. Choosing the right vector index: HNSW → Fast real-time search, IVF → Disk-based large-scale search, PQ → Memory-efficient compression, ✅ The right index can give: 10x speedup,5x memory reduction
+- **Query Optimization**: Optimize query performance. This includes: Searching only filtered partitions, Using metadata filtering, Limiting top-K size, Avoiding full scans, ✅ Keeps latency low even with millions of vectors.
+- **Connection Pooling**: Manage database connections. Instead of opening a new DB connection per request: Reuse a pool of open connections
+- **Resource Management**: Optimize resource usage. Control: Memory usage, CPU usage, Disk I/O, So that: Bulk ingestion doesn’t starve live queries
+Queries don’t crash the DB under load
 
 **Best Practices:**
-- **Load Balancing**: Distribute queries
+- **Load Balancing**: Distribute queries. 
 - **Caching**: Cache frequent queries
 - **Async Processing**: Handle multiple queries
 - **Database Optimization**: Optimize vector search
