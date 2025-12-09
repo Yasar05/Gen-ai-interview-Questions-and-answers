@@ -10,7 +10,11 @@
 
 **Answer:**
 
+All 3 models are decoder only transformers, with causal self attention and autoregression next token prediction.
+Causal self-attention is a type of attention mechanism where each token is allowed to attend only to previous tokens and itself, but never to future tokens.
 **GPT (Generative Pre-trained Transformer):**
+Heavy RLHF layers, Built-in tool calling & function execution, Multimodal extensions (text, image, audio), System-message & role-based control deeply integrated
+Optimized for API reliability at global scale. Design Goal: Maximum instruction-following, creativity, and production reliability
 - **Architecture**: Decoder-only transformer
 - **Training**: Autoregressive language modeling
 - **Parameters**: 175B (GPT-3), ~1.7T (GPT-4)
@@ -18,14 +22,16 @@
 - **Use Cases**: Text generation, completion, creative tasks
 
 **LLaMA (Large Language Model Meta AI):**
+Extremely clean & minimal transformer design, No heavy built-in RLHF, No proprietary tool layers, Designed for:,LoRA / QLoRA, PEFT, On-prem deployment,Optimized for parameter efficiency. Open, efficient, fine-tune-friendly foundation model
 - **Architecture**: Decoder-only transformer
 - **Training**: Self-supervised learning
 - **Parameters**: 7B, 13B, 30B, 65B
 - **Strengths**: Open-source, efficient, research-friendly
 - **Use Cases**: Research, fine-tuning, open development
-
+only llama is open source. the rest others arent. GP and claude has limited finetuning
 **Claude (Anthropic):**
 Claude is trained using: Constitutional AI → The model learns safety rules from a written “constitution” instead of relying only on human feedback. Some RLHF, but much less than GPT. This makes Claude: More self-correcting, More consistent in refusing harmful requests, More aligned without massive human labeling
+🔹 Design Goal: Maximum safety, harmlessness, and long-context reasoning
 - **Architecture**: Transformer-based
 - **Training**: Constitutional AI, RLHF
 - **Parameters**: ~100B-1T
@@ -40,13 +46,17 @@ Claude is trained using: Constitutional AI → The model learns safety rules fro
 | **Efficiency** | Medium | High | Medium |
 | **Research** | Limited | Full | Limited |
 
-| Feature        | **GPT**                           | **LLaMA**                                          | **Claude**                                  |
-| -------------- | --------------------------------- | -------------------------------------------------- | ------------------------------------------- |
-| Architecture   | Decoder-only Transformer          | Decoder-only Transformer                           | Decoder-only Transformer                    |
-| Training Style | Autoregressive + SFT + RLHF       | Self-supervised pretraining + optional fine-tuning | Constitutional AI + some RLHF               |
-| Parameters     | 175B (GPT-3), GPT-4 undisclosed   | 7B–70B+                                            | Not public (hundreds of billions estimated) |
-| Key Strength   | Creativity, instruction following | Open-source, efficiency, fine-tuning               | Safety, long reasoning, alignment           |
-| Typical Use    | Chatbots, content, code, RAG      | Research, on-prem AI, custom models                | Safe assistants, compliance, enterprise     |
+| Feature                 | **GPT**                         | **LLaMA**                  | **Claude**                         |
+| ----------------------- | ------------------------------- | -------------------------- | ---------------------------------- |
+| Base Architecture       | Decoder-only Transformer        | Decoder-only Transformer   | Decoder-only Transformer           |
+| Attention Type          | Causal self-attention           | Causal self-attention      | Causal self-attention              |
+| Core Training           | Autoregressive + SFT + RLHF     | Autoregressive pretraining | Autoregressive + Constitutional AI |
+| Safety Handling         | RLHF-heavy                      | Mostly external            | Built-in deeply                    |
+| Tool Calling            | Native                          | Custom-built by users      | Native                             |
+| Open Source             | ❌ No                            | ✅ Yes                      | ❌ No                               |
+| Fine-tuning Flexibility | ⚠️ Limited                      | ✅ Excellent                | ⚠️ Limited                         |
+| Context Length          | Large                           | Medium–Large               | ✅ Very Large                       |
+| Primary Optimization    | Product & instruction following | Efficiency & research      | Safety & reasoning                 |
 
 ---
 
