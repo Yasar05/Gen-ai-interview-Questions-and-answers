@@ -64,11 +64,30 @@ Claude is trained using: Constitutional AI → The model learns safety rules fro
 
 **Answer:**
 
+this is dense feedforward neural network wothout MOE. attention here is multi head self attention
+Layer 1 → Attention + FFN
+Layer 2 → Attention + FFN
+Layer 3 → Attention + FFN
+...
+Layer N → Attention + FFN
+
+if we use moe, in each layer instead of 1 ffn we will have multiple ffn
+Self-Attention
+↓
+MULTIPLE FFNs (Experts)
+Layer1 will have
+FFN Expert 1
+FFN Expert 2
+FFN Expert 3
+...
+FFN Expert 16
+
 Mixture of Experts is a neural network architecture where instead of using one big model for every input, the system contains many smaller “expert” networks, and only a few of them are activated for each input. In short: Not all neurons work every time — only the most relevant “experts” are used per token. This gives you:
 ✅ Massive model capacity ✅ Much lower compute per request.
 Traditional dense models: Activate all parameters for every token. As models grow → cost grows linearly with size This becomes: ❌ Too expensive, ❌ Too slow
 ❌ Too energy-hungry. MoE solves this by: Having many experts. Activating only 1–4 experts per token. So you get: The power of a trillion-parameter model at the cost of a 50–100B model per request.
-
+Attention = communication between tokens
+FFN = thinking / transformation done on each token individually
 **How MoE Works:**
 Let’s say your MoE layer has: a. 64 experts b. A router (also called a gating network). Only 2 experts are activated per token
 A token’s hidden vector reaches the MoE layer in the transformer.
